@@ -45,8 +45,14 @@ class API {
         characterList.forEach((element) {
           element.whenComplete(() async {
             var character = await element;
-            if (isValidCharacter(character) && characters.length < 100)
+            if (isValidCharacter(character) &&
+                characters.length < 100 &&
+                characters
+                    .where((element) => element.name == character.name)
+                    .isEmpty) {
               characters.add(character);
+            } else
+              print("DUPLICATE FOUND");
           });
         });
 

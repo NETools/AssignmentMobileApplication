@@ -29,7 +29,7 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
         } else {
           print("LOAD CACHED!!!!");
           setState(() {
-            this.characters = characters;
+            this.characters = this.characters;
           });
         }
       }();
