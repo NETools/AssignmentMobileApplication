@@ -19,15 +19,19 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
       () async {
         characters = await Database().storedCharacters;
         // then the characters are loaded from the API and displayed as soon as they are there
-        API().fetchRemoteGoTCharacters().then((characters) {
-          setState(() {
-            if (this.characters!.length < 100) {
+        if (this.characters!.length < 100) {
+          API().fetchRemoteGoTCharacters().then((characters) {
+            setState(() {
               this.characters = characters;
               Database().save(characters: characters);
-            } else
-              print("LOAD CACHED!!!!");
+            });
           });
-        });
+        } else {
+          print("LOAD CACHED!!!!");
+          setState(() {
+            this.characters = characters;
+          });
+        }
       }();
     });
 
